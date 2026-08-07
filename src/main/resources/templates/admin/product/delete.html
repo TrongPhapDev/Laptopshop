@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin</title>
+
+    <link href="/admin/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <div th:replace="/admin/layout/header :: header"></div>
+    <div id="layoutSidenav">
+        <div th:replace="/admin/layout/sidebar :: sidebar"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Manage Product</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Products</li>
+                    </ol>
+                    <div class="container mt-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="card border-danger">
+                                    <div class="card-header bg-danger text-white text-center">
+                                        <strong>Xóa người dùng</strong>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <p class="text-danger fs-5" style="display: none">
+                                            Bạn có chắc muốn xóa người dùng với ID =
+                                            <strong th:text="${product.id}"></strong>?
+                                        </p>
+                                        <form th:action="@{/admin/product/delete}" method="post" th:object="${product}">
+                                            <input type="hidden" th:field="*{id}" />
+
+                                            <button type="submit" class="btn btn-danger">
+                                                Xác nhận
+                                            </button>
+
+                                            <a href="/admin/product" class="btn btn-secondary ms-2">Hủy</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div th:replace="/admin/layout/footer :: footer"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="/admin/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

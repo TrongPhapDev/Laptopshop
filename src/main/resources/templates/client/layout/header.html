@@ -1,0 +1,92 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <body>
+    <div th:fragment="header">
+    <style>
+      .nav-item.dropdown .dropdown-toggle::after {
+        display: none !important;
+      }
+    </style>
+      <!-- Navbar start -->
+      <div class="container-fluid fixed-top">
+        <div class="container px-0">
+          <nav class="navbar navbar-light bg-white navbar-expand-xl">
+            <a th:href="@{/}" class="navbar-brand">
+              <h1 class="text-primary display-6">Laptopshop</h1>
+            </a>
+            <button
+              class="navbar-toggler py-2 px-3"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+            >
+              <span class="fa fa-bars text-primary"></span>
+            </button>
+            <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+              <div class="navbar-nav mx-auto">
+                <a th:href="@{/}" class="nav-item nav-link active">Trang chủ</a>
+                <a href="#" class="nav-item nav-link">Sản phẩm</a>
+                <a href="#" class="nav-item nav-link">Liên hệ</a>
+              </div>
+              <div class="d-flex m-3 me-0 align-items-center">
+                <button
+                  class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#searchModal"
+                >
+                  <i class="fas fa-search text-primary"></i>
+                </button>
+                <a href="#" class="position-relative me-4 my-auto">
+                  <i class="fa fa-shopping-bag fa-2x"></i>
+                  <span
+                    class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+                    style="top: -5px; left: 15px; height: 20px; min-width: 20px"
+                    >3</span
+                  >
+                </a>
+                
+                <!-- Logged In State -->
+                <div sec:authorize="isAuthenticated()" class="nav-item dropdown my-auto">
+                  <a href="#" class="nav-link dropdown-toggle p-0" data-bs-toggle="dropdown">
+                    <i class="fas fa-user fa-2x"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-3"
+                    style="min-width: 280px; border-radius: 15px;">
+                    <div class="text-center p-4">
+                      <img src="/images/avatar/default.png" class="rounded-circle border border-3 border-white shadow-sm mb-3"
+                        style="width: 100px; height: 100px; object-fit: cover;" alt="Avatar" />
+                      <h6 class="mb-1 fw-bold text-dark" sec:authentication="name">User Email</h6>
+                      <small class="text-muted">Chào mừng trở lại!</small>
+                    </div>
+                    <div class="list-group list-group-flush">
+                      <a href="/admin" class="list-group-item list-group-item-action border-0 px-4 py-2">
+                        <i class="fas fa-user-shield me-3 text-warning"></i>Quản lý tài khoản
+                      </a>
+                      <a href="/order-history" class="list-group-item list-group-item-action border-0 px-4 py-2">
+                        <i class="fas fa-shopping-basket me-3 text-success"></i>Lịch sử mua hàng
+                      </a>
+                      <div class="dropdown-divider my-2"></div>
+                      <form th:action="@{/logout}" method="post" class="px-3 pb-2">
+                        <button type="submit" class="dropdown-item text-danger py-2 rounded-3">
+                          <i class="fas fa-power-off me-2"></i>Đăng xuất
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Not Logged In State -->
+                <div sec:authorize="isAnonymous()" class="my-auto">
+                  <a th:href="@{/login}" class="btn btn-primary text-white rounded-pill px-4 py-2">
+                    Đăng nhập
+                  </a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- Navbar End -->
+    </div>
+  </body>
+</html>
